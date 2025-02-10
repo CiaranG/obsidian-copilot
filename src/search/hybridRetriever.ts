@@ -127,7 +127,9 @@ export class HybridRetriever extends BaseRetriever {
 
       // Directly return the content assuming it's structured as expected
       if (rewrittenQueryObject && "content" in rewrittenQueryObject) {
-        return rewrittenQueryObject.content as string;
+        let content = rewrittenQueryObject.content;
+        content = content.replace(/<think>[\s\S]*<\/think>/, "");
+        return content as string;
       }
       console.warn("Unexpected rewrittenQuery format. Falling back to original query.");
       return query;

@@ -32,5 +32,7 @@ export async function getStandaloneQuestion(
       },
     ]);
 
-  return response.content as string;
+  let content = response.content;
+  content = content.replace(/<think>[\s\S]*<\/think>/, "");
+  return content as string;
 }
